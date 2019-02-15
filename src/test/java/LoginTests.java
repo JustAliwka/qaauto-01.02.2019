@@ -20,8 +20,10 @@ public class LoginTests {
             String siteURL = "https://www.linkedin.com/";
             String siteTitle = "LinkedIn: Log In or Sign Up";
             WebElement verificationElement = driver.findElement(By.xpath("//input[@class='login submit-button']"));
+            String currentURL = driver.getCurrentUrl();
+            String currentTitle = driver.getTitle();
 
-            boolean result = landingPage.isPageLoaded(siteURL, siteTitle, verificationElement);
+            boolean result = landingPage.isPageLoaded(siteURL, currentURL, siteTitle, currentTitle, verificationElement);
             System.out.println("---- Result of the test: " + result + "----");
 
             driver.quit();
@@ -39,8 +41,10 @@ public class LoginTests {
 
 
             WebElement verificationElement = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
+            String currentURL = driver.getCurrentUrl();
+            String currentTitle = driver.getTitle();
 
-            boolean result = landingPage.isPageLoaded(siteURL, siteTitle, verificationElement);
+            boolean result = landingPage.isPageLoaded(siteURL, currentURL, siteTitle, currentTitle, verificationElement);
             System.out.println("---- Result of the test: " + result + "----");
 
             driver.quit();

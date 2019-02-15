@@ -28,11 +28,12 @@ public class LandingPage {
     }
 
 
-    public boolean isPageLoaded(String siteURL, String siteTitle,  WebElement verificationElement){
+    public boolean isPageLoaded(String siteURL, String currentTitle, String siteTitle,
+                                String currentURL, WebElement verificationElement){
 
         boolean siteLoaded = (siteTitle == currentTitle &&
-                siteURL == currentURL &&
-                verificationElement.isDisplayed());
+                siteURL == currentURL
+                && verificationElement.isDisplayed());
 
         return siteLoaded;
     }
