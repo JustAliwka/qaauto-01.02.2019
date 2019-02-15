@@ -8,61 +8,32 @@ import javax.swing.JButton;
 import java.awt.*;
 
 public class LoginTests {
-    @Test
+    //@Test
         public void negativeLoginTest(){
             WebDriver driver = new ChromeDriver();
-            driver.get("https://www.linkedin.com");
-
+            driver.get("https://www.linkedin.com/");
 
             LandingPage landingPage = new LandingPage(driver);
-            landingPage.login("wowaliwa.gmail.com", "");
+            Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded");
+            landingPage.login("wowaliwa@gmail.com", "");
 
-            String siteURL = "https://www.linkedin.com/";
-            String siteTitle = "LinkedIn: Log In or Sign Up";
-            WebElement verificationElement = driver.findElement(By.xpath("//input[@class='login submit-button']"));
-            String currentURL = driver.getCurrentUrl();
-            String currentTitle = driver.getTitle();
-
-            boolean result = landingPage.isPageLoaded(siteURL, currentURL, siteTitle, currentTitle, verificationElement);
-            System.out.println("---- Result of the test: " + result + "----");
+            Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded");
 
             driver.quit();
         }
 
-
+    @Test
         public void positiveLoginTest() {
             WebDriver driver = new ChromeDriver();
-            driver.get("https://www.linkedin.com");
-            String siteURL = "https://www.linkedin.com/feed/";
-            String siteTitle = "LinkedIn";
+            driver.get("https://www.linkedin.com/");
 
             LandingPage landingPage = new LandingPage(driver);
             landingPage.login("wowaliwa@gmail.com", "wowaliwa8542");
 
-
-            WebElement verificationElement = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-            String currentURL = driver.getCurrentUrl();
-            String currentTitle = driver.getTitle();
-
-            boolean result = landingPage.isPageLoaded(siteURL, currentURL, siteTitle, currentTitle, verificationElement);
-            System.out.println("---- Result of the test: " + result + "----");
+            HomePage homePage = new HomePage(driver);
+            Assert.assertTrue(homePage.isPageLoaded(), "Login failed. Home page didn't load after Login");
 
             driver.quit();
         }
 
         }
-
-
-
-
-
-/*
-    Home Task #4:
-        1. isPageLoaded() method
-        - Implement isPageLoaded() method inside LandingPage.class
-        - isPageLoaded() method should check page URL, page Title and specific WebElement on Landing page
-        - isPageLoaded() method should return boolean (true or false)
-        2. Update both negative and successful Tests
-        - Use new LandingPage() in both tests
-        - Use isPageLoaded() method in Assert to verify that Landing page is loaded
-        - Remove any commented/unused code*/
