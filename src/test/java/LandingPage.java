@@ -9,17 +9,10 @@ public class LandingPage {
     WebElement userEmailField;
     WebElement userPasswordField;
     WebElement signInButton;
-    String currentURL;
-    String currentTitle;
-
-
-
 
     public LandingPage(WebDriver driver) {
         this.driver = driver;
         initElements();
-        initTitlURL();
-
     }
 
     public void initElements() {
@@ -33,10 +26,7 @@ public class LandingPage {
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
     }
-    public void initTitlURL() {
-        currentURL = driver.getCurrentUrl();
-        currentTitle = driver.getTitle();
-    }
+
 
     public boolean isPageLoaded(String siteURL, String siteTitle,  WebElement verificationElement){
 
