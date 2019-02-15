@@ -1,11 +1,7 @@
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import javax.swing.JButton;
-import java.awt.*;
 
 public class LoginTests {
     //@Test
@@ -37,3 +33,9 @@ public class LoginTests {
         }
 
         }
+
+        //Hometask: create couple of explorotary Negative tests ( use classes of equalance) for login form
+        //find tipical tests, create separate tests
+//rename first test negativeLoginPassEmpty
+//use landing page for all tests
+//create new class for LoginFailed, use isPageLoaded for LoginFailed
