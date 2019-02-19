@@ -76,10 +76,38 @@ public class LoginTests {
 
         LandingPage landingPage = new LandingPage(driver);
         Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded");
-        landingPage.login("    @    .com", "    8888");
+        landingPage.login("    @    .com", "    8");
 
         LoginFailed loginFailed = new LoginFailed(driver);
-        Assert.assertTrue(loginFailed.isPageLoaded(), "Landing page is not loaded");
+        Assert.assertTrue(loginFailed.isPageLoaded(), "Login Failed page is not loaded");
+
+        driver.quit();
+    }
+    @Test
+    public void negativeLoginTestPercentInLoginAndPass(){
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.linkedin.com/");
+
+        LandingPage landingPage = new LandingPage(driver);
+        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded");
+        landingPage.login("%%%", "%%%");
+
+        LoginFailed loginFailed = new LoginFailed(driver);
+        Assert.assertTrue(loginFailed.isPageLoaded(), "Login Failed page is not loaded");
+
+        driver.quit();
+    }
+    @Test
+    public void negativeLoginTestCorrectInLoginAndWrongPass(){
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.linkedin.com/");
+
+        LandingPage landingPage = new LandingPage(driver);
+        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded");
+        landingPage.login("wowaliwa@gmail.com", "*******");
+
+        LoginFailed loginFailed = new LoginFailed(driver);
+        Assert.assertTrue(loginFailed.isPageLoaded(), "Login Failed page is not loaded");
 
         driver.quit();
     }
@@ -97,10 +125,16 @@ public class LoginTests {
         landingPage.login(specialCharsLogin1+"@" +specialCharsLogin2 +".com", specialCharsPass);
 
         LoginFailed loginFailed = new LoginFailed(driver);
-        Assert.assertTrue(loginFailed.isPageLoaded(), "Landing page is not loaded");
+        Assert.assertTrue(loginFailed.isPageLoaded(), "Login Failed page is not loaded");
 
         driver.quit();
     }
+
+
+
+
+
+
         }
 
         //Hometask: create couple of explorotary Negative tests ( use classes of equalance) for login form
