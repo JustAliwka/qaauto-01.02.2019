@@ -31,11 +31,17 @@ public class LoginFailed {
 
     public String getPasswordValidationMessageText() {
 
+
         return passwordValidationMessage.getText();
     }
 
+
     public String getEmailValidationMessageText() {
 
+
+
         return getEmailValidationMessageText.getText();
+
     }
+
 }
