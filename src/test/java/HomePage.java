@@ -19,11 +19,6 @@ public class HomePage {
         return profileNavMenuItem.isDisplayed()
                 && driver.getCurrentUrl().contains("/feed/")
                 && driver.getTitle().contains("LinkedIn");
-    }
-
-
-
-
-
+}
 
 }

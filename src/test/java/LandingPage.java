@@ -1,43 +1,56 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import java.util.Random;
 
 
 public class LandingPage {
 
     private WebDriver driver;
-    private WebElement userEmailField;
-    private WebElement userPasswordField;
-    private WebElement signInButton;
-    private String title;
 
+    @FindBy(xpath = "//input[@class='login submit-button']")
+    private WebElement signInButton;
+
+    @FindBy(name = "session_key")
+    private WebElement userEmailField;
+
+    @FindBy(name = "session_password")
+    private WebElement userPasswordField;
 
     public LandingPage(WebDriver driver) {
         this.driver = driver;
-        initElements();
+        PageFactory.initElements(driver, this);
     }
 
-    private void initElements() {
-        signInButton = driver.findElement(By.xpath("//input[@class='login submit-button']"));
-        userEmailField = driver.findElement(By.name("session_key"));
-        userPasswordField = driver.findElement(By.name("session_password"));
-        title = driver.getTitle();
-    }
-
-    public void login(String userEmail, String userPassword){
+    public HomePage login(String userEmail, String userPassword) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
+
+        return new HomePage(driver);
     }
 
+    public LandingPage loginFailLanding(String userEmail, String userPassword) {
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPassword);
+        signInButton.click();
+
+        return new LandingPage(driver);
+    }
+
+    public LoginFailed loginFail(String userEmail, String userPassword) {
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPassword);
+        signInButton.click();
+
+        return new LoginFailed(driver);
+    }
 
     public boolean isPageLoaded() {
 
         return signInButton.isDisplayed()
-                && driver.getCurrentUrl().equals("https://www.linkedin.com/")
-                && driver.getTitle().equals(title);
+                && driver.getCurrentUrl().equals("https://www.linkedin.com/");
     }
 
     public static String generateRandomChars(String candidateChars, int length) {
@@ -47,7 +60,6 @@ public class LandingPage {
             sb.append(candidateChars.charAt(random.nextInt(candidateChars
                     .length())));
         }
-
         return sb.toString();
     }
 }
